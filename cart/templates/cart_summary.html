@@ -8,7 +8,7 @@
 {% endblock css %}
 
 {% block content %}
-    <h3>Resumo das compras</h3>
+    <h3>Carrinho de compras</h3>
         {% if messages %}
             <section id="messages">
                 {% for message in messages %}
@@ -32,9 +32,9 @@
                         {% for product in cart %}
                             <tr>
                                 <td>{{ product.product }}</td>
-                                <td>{{ product.price }}</td>
+                                <td>R$ {{ product.price }}</td>
                                 <td>{{ product.purchase_qtd }}</td>
-                                <td>{{ product.subtotal }}</td>
+                                <td>R$ {{ product.subtotal }}</td>
                                 <td>
                                     <form action="{% url "cart:cart_delete" product.product.id product.purchase_qtd  %}" method="post">
                                         {% csrf_token %}
@@ -45,7 +45,21 @@
                         {% endfor %}
                         <tr>
                             <td><b>Total</b></td>
-                            <td colspan="4">{{ cart.get_grand_total }}</td>
+                            <td colspan="4">R$ {{ cart.get_grand_total }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <form action="{% url "core:index"  %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-primary" value="Continuar comprando">
+                                </form>
+                            </td>
+                            <td colspan="3">
+                                <form action="{% url "orders:order_create"  %}" method="get">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-primary" value="Finalizar compra">
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
