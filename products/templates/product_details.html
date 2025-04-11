@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block title %} {{ product }} {% endblock title %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "product_details.css" %}">
+{% endblock css %}
+
+{% block content %}
+    {% if messages %}
+        <section id="messages">
+            {% for message in messages %}
+                <div class="alert alert-dark" role="alert">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+    <section id="product">
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><b>{{ product }}</b></h5>
+                <p class="card-text">{{ product.description }}</p>
+                <b><p>Quantidade em estoque: {{ product.stock }}</p></b>
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                    {% csrf_token %}
+                    {{ form.qtd }}
+                    <input type="submit" class="btn btn-primary" value="Adicionar ao carrinho">
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

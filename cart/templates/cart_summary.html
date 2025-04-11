@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block title %} Carrinho {% endblock title %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "cart_summary.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <h3>Resumo das compras</h3>
+        {% if messages %}
+            <section id="messages">
+                {% for message in messages %}
+                    <div class="alert alert-dark" role="alert">{{ message }}</div>
+                {% endfor %}
+            </section>
+        {% endif %}
+        {% if cart_len %}
+            <section id="cart">
+                <table>
+                    <thead>
+                        <tr>
+                            <td><b>Produto</b></td>
+                            <td><b>Preço unitário</b></td>
+                            <td><b>Quantidade</b></td>
+                            <td><b>Sub-total</b></td>
+                            <td><b>Remover</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in cart %}
+                            <tr>
+                                <td>{{ product.product }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.purchase_qtd }}</td>
+                                <td>{{ product.subtotal }}</td>
+                                <td>
+                                    <form action="{% url "cart:cart_delete" product.product.id product.purchase_qtd  %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-primary" value="Remover">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td colspan="4">{{ cart.get_grand_total }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        {% else %}
+            <h2>Carrinho vazio!</h2>
+        {% endif %}
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% block title %} Resgistro {% endblock title %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "register_user.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section id="register_user">
+        <table>
+            <form action="{% url "user_auth:register_user" %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputEmail1" class="form-label"><b>Usuário</b></label></td>
+                        <td>{{ form.username }}</td>
+                    </tr>                    
+                </div>
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputEmail1" class="form-label"><b>Nome</b></label></td>
+                        <td>{{ form.first_name }}</td>
+                    </tr>
+                </div>
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputEmail1" class="form-label"><b>Sobrenome</b></label></td>
+                        <td>{{ form.last_name }}</td>
+                    </tr>
+                </div>
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputEmail1" class="form-label"><b>Endereço de e-mail</b></label></td>
+                        <td>
+                            {{ form.email }}
+                            <div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
+                        </td>
+                    </tr>
+                </div>
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputPassword1" class="form-label"><b>Senha</b></label></td>
+                        <td>{{ form.password1 }}</td>
+                    </tr>
+                </div>
+                <div class="mb-3">
+                    <tr>
+                        <td><label for="exampleInputPassword1" class="form-label"><b>Confirmar senha</b></label></td>
+                        <td>{{ form.password2 }}</td>
+                    </tr>
+                </div>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </section>    
+{% endblock content %}
