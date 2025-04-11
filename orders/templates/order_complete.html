@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block title %}Pedido finalizado{% endblock title %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'order_complete.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <h1>O número do seu pedido é: {{ order.id }}</h1>
+    <h3>Obrigado pela compra!</h3>
+{% endblock content %}
