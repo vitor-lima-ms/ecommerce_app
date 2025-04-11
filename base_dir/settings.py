@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core',
     'products',
     'cart',
+    'orders',
     'user_auth',
 ]
 
@@ -95,8 +96,8 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         # 'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'switchback.proxy.rlwy.net',
-        'PORT': '16006',
+        'HOST': 'shortline.proxy.rlwy.net',
+        'PORT': '45005',
     }
 }
 
