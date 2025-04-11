@@ -21,12 +21,21 @@
             <div class="card-body">
                 <h5 class="card-title"><b>{{ product }}</b></h5>
                 <p class="card-text">{{ product.description }}</p>
+                <p><b>R$ {{ product.price }}</b></p>
                 <b><p>Quantidade em estoque: {{ product.stock }}</p></b>
-                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                    {% csrf_token %}
-                    {{ form.qtd }}
-                    <input type="submit" class="btn btn-primary" value="Adicionar ao carrinho">
-                </form>
+                {% if user.is_authenticated %}
+                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                        {% csrf_token %}
+                        {{ form.qtd }}
+                        <input type="submit" class="btn btn-primary" value="Adicionar ao carrinho">
+                    </form>
+                {% else %}
+                    <form action="{% url "user_auth:login_user" %}" method="post">
+                        {% csrf_token %}
+                        {{ form.qtd }}
+                        <input type="submit" class="btn btn-primary" value="Adicionar ao carrinho">
+                    </form>
+                {% endif %}
             </div>
         </div>
     </section>
