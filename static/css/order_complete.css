@@ -7,3 +7,9 @@ h3 {
     margin-top: 1em;
     text-align: center;
 }
+
+#paypal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
