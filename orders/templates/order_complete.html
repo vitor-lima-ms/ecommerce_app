@@ -9,5 +9,8 @@
 
 {% block content %}
     <h1>O número do seu pedido é: {{ order.id }}</h1>
-    <h3>Obrigado pela compra!</h3>
+    <h3>Pagamento com PayPal</h3>
+    <section id="paypal">
+        {{ form.render }}
+    </section>
 {% endblock content %}
